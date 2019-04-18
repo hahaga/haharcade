@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - checkout:
-        path: ~/repo/client
+          path: ~/repo/client
 
       # Download and cache dependencies
       - restore_cache:
