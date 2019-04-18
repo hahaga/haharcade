@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:9
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -17,7 +17,8 @@ jobs:
     working_directory: ~/client
 
     steps:
-      - checkout
+      - checkout:
+          path: ~/client
 
       # Download and cache dependencies
       - restore_cache:
@@ -26,7 +27,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: npm install
+      - run: cd client && npm install
 
       - save_cache:
           paths:
@@ -34,5 +35,5 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm run test:unit
-      - run: npm run test:e2e
+      - run: cd client && npm run test:unit
+      - run: cd client && npm run test:e2e
