@@ -1,39 +1,68 @@
 <template>
-  <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>open_in_new</v-icon>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+  <div id="app">
+    <h2>Bar Chart Example</h2>
+    <!-- These are the custom components we'll create -->
+    <!-- Values for `my-box` are percentages of the width of the canvas. -->
+    <!-- Each bar will take up an equal space of the canvas. -->
+    <my-canvas>
+      <test>
+      </test>
+    </my-canvas>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import MyCanvas from './components/MyCanvas.vue';
+import MyBox from './components/MyBox.vue';
+import Test from './components/Test.vue';
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    MyCanvas,
+    Test,
   },
-  data () {
+
+  data() {
     return {
-      //
-    }
-  }
-}
+      chartValues: [
+        {val: 24, color: 'red'},
+        {val: 32, color: '#0f0'},
+        {val: 66, color: 'rebeccapurple'},
+        {val: 1, color: 'green'},
+        {val: 28, color: 'blue'},
+        {val: 60, color: 'rgba(150, 100, 0, 0.2)'},
+      ],
+    };
+  },
+
+  // Randomly selects a value to randomly increment or decrement every 16 ms.
+  // Not really important, just demonstrates that reactivity still works.
+  mounted() {
+    let dir = 1;
+    let selectedVal = Math.floor(Math.random() * this.chartValues.length);
+
+    setInterval(() => {
+      if (Math.random() > 0.995) { dir *= -1; }
+      if (Math.random() > 0.99) { selectedVal = Math.floor(Math.random() * this.chartValues.length); }
+
+      this.chartValues[selectedVal].val = Math.min(Math.max(this.chartValues[selectedVal].val + dir * 0.5, 0), 100);
+    }, 16);
+  },
+};
 </script>
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  box-sizing: border-box;
+}
+</style>
