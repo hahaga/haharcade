@@ -1,53 +1,22 @@
 <template>
   <div id="app">
-    <h2>Bar Chart Example</h2>
-    <!-- These are the custom components we'll create -->
-    <!-- Values for `my-box` are percentages of the width of the canvas. -->
-    <!-- Each bar will take up an equal space of the canvas. -->
-    <my-canvas>
-      <test>
-      </test>
-    </my-canvas>
+    <Header></Header>
+    <Content></Content>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import MyCanvas from './components/MyCanvas.vue';
-import MyBox from './components/MyBox.vue';
-import Test from './components/Test.vue';
+import Header from './components/Header.vue';
+import Content from './components/Content.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   name: 'app',
   components: {
-    MyCanvas,
-    Test,
-  },
-
-  data() {
-    return {
-      chartValues: [
-        {val: 24, color: 'red'},
-        {val: 32, color: '#0f0'},
-        {val: 66, color: 'rebeccapurple'},
-        {val: 1, color: 'green'},
-        {val: 28, color: 'blue'},
-        {val: 60, color: 'rgba(150, 100, 0, 0.2)'},
-      ],
-    };
-  },
-
-  // Randomly selects a value to randomly increment or decrement every 16 ms.
-  // Not really important, just demonstrates that reactivity still works.
-  mounted() {
-    let dir = 1;
-    let selectedVal = Math.floor(Math.random() * this.chartValues.length);
-
-    setInterval(() => {
-      if (Math.random() > 0.995) { dir *= -1; }
-      if (Math.random() > 0.99) { selectedVal = Math.floor(Math.random() * this.chartValues.length); }
-
-      this.chartValues[selectedVal].val = Math.min(Math.max(this.chartValues[selectedVal].val + dir * 0.5, 0), 100);
-    }, 16);
+    Header,
+    Content,
+    Footer,
   },
 };
 </script>
@@ -58,11 +27,14 @@ html, body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 #app {
   position: relative;
   height: 100vh;
   width: 100vw;
-  padding: 20px;
   box-sizing: border-box;
 }
 </style>
