@@ -7,12 +7,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    ctx: null,
+    gameName: 'snake',
   },
   mutations: {
-    setContext(state, context) {
-      state.ctx = context;
-    }
+    
   },
   actions: {
 

@@ -1,40 +1,45 @@
 <template>
   <div id="app">
     <Header></Header>
-    <Content></Content>
+    <router-view/>
     <Footer></Footer>
   </div>
 </template>
 
-<script>
-import Header from './components/Header.vue';
-import Content from './components/Content.vue';
-import Footer from './components/Footer.vue';
 
-export default {
-  name: 'app',
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
+
+@Component({
   components: {
     Header,
-    Content,
     Footer,
   },
-};
+})
+export default class App extends Vue {}
 </script>
 
-<style>
-html, body {
+<style lang="scss">
+html, body, h1 {
   margin: 0;
   padding: 0;
 }
 
 a {
-  text-decoration: none;
+  font-weight: bold;
+  color: #2c3e50;
+  &.router-link-exact-active {
+    color: #42b983;
+  }
 }
 
 #app {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  box-sizing: border-box;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 </style>

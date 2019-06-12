@@ -1,32 +1,23 @@
 <template>
-    <header>
-        <a href="#"><img id="logo" title="HahaDICKBUTTCHUrcade" src="../assets/dickbuttchu.jpg"></a>
+    <div id="header">
+        <h1>Header</h1>
         <Nav></Nav>
-    </header>
+    </div>
 </template>
 
-<script>
-import Nav from './Nav.vue';
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import Nav from '@/components/Nav.vue';
 
-export default {
-  name: 'Header',
+@Component({
   components: {
     Nav,
   },
-};
+})
+export default class Header extends Vue {}
 </script>
 
-<style>
-    header {
-        background: #bb0000;
-        width: 100vw;
-        height: 150px;
-    }
-
-    #logo {
-        position: absolute;
-        top: 0px;
-        left: calc(50% - 75px);
-        width: 150px;
-    }
-</style>
+<style lang="scss">
+#header {
+  background-color: green;
+}</style>
