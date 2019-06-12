@@ -6,7 +6,9 @@ module.exports = {
     browser
       .url(process.env.VUE_DEV_SERVER_URL)
       .waitForElementVisible('#app', 5000)
-      .assert.containsText('h1', 'Welcome to Vuetify')
+      .assert.elementPresent('#content')
+      .assert.containsText('h1', 'Header')
+      .assert.elementCount('img', 1)
       .end()
   }
 }
